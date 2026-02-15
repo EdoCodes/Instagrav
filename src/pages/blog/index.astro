@@ -141,6 +141,20 @@ const blogPosts = [
     slug: "history-of-gravity-theory",
     date: "2024-03-11",
     readTime: "10 min read"
+  },
+  {
+    title: "The Instant Gravity Revolution: From Newton's Instantaneous Force to Einstein's Speed Limit",
+    description: "Explore the groundbreaking discovery that gravity isn't instantaneous. Learn how Einstein revolutionized our understanding of gravity's speed and what it means for the universe.",
+    slug: "instant-gravity-revolution",
+    date: "2024-03-14",
+    readTime: "12 min read"
+  },
+  {
+    title: "The Scientists Who Unlocked Gravity: From Ancient Philosophy to Modern Physics",
+    description: "Journey through history with the brilliant minds who shaped our understanding of gravity—from Aristotle to Einstein, and the researchers pushing boundaries today.",
+    slug: "scientists-of-gravity",
+    date: "2024-03-17",
+    readTime: "15 min read"
   }
 ];
 
@@ -162,14 +176,29 @@ function formatDate(dateString: string) {
     <div class="container">
       <h1>InstaGrav Blog</h1>
       <p class="subtitle">Exploring Gravity and the Universe</p>
+      <div class="search-container">
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Search articles about gravity, instant gravity, black holes..."
+          class="search-input"
+        />
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+      </div>
     </div>
   </div>
 
   <section class="blog-grid-section">
     <div class="container">
-      <div class="blog-grid">
+      <div id="no-results" class="no-results" style="display: none;">
+        <p>No articles found matching your search. Try different keywords!</p>
+      </div>
+      <div class="blog-grid" id="blog-grid">
         {blogPosts.map(post => (
-          <article class="blog-card">
+          <article class="blog-card" data-title={post.title.toLowerCase()} data-description={post.description.toLowerCase()}>
             <div class="blog-card-content">
               <div class="blog-meta">
                 <span class="date">{formatDate(post.date)}</span>
@@ -189,13 +218,115 @@ function formatDate(dateString: string) {
       </div>
     </div>
   </section>
+
+  <script>
+    const searchInput = document.getElementById('search-input');
+    const blogGrid = document.getElementById('blog-grid');
+    const noResults = document.getElementById('no-results');
+    const blogCards = document.querySelectorAll('.blog-card');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        blogCards.forEach(card => {
+          const title = card.getAttribute('data-title') || '';
+          const description = card.getAttribute('data-description') || '';
+
+          if (searchTerm === '' || title.includes(searchTerm) || description.includes(searchTerm)) {
+            card.style.display = 'block';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (noResults) {
+          noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+      });
+    }
+  </script>
 </Layout>
 
 <style>
   .blog-header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    background:
+      linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.95) 100%),
+      url('https://images.pexels.com/photos/2150/sky-space-dark-galaxy.jpg?auto=compress&cs=tinysrgb&w=1920') center/cover;
     padding: 5rem 2rem 4rem;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blog-header::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: 5%;
+    width: 300px;
+    height: 300px;
+    background: url('https://images.pexels.com/photos/220201/pexels-photo-220201.jpeg?auto=compress&cs=tinysrgb&w=600') center/cover;
+    border-radius: 50%;
+    opacity: 0.15;
+    pointer-events: none;
+    animation: float 18s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-15px) rotate(5deg);
+    }
+  }
+
+  .search-container {
+    max-width: 600px;
+    margin: 2rem auto 0;
+    position: relative;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    font-size: 1rem;
+    border: 2px solid rgba(79, 172, 254, 0.3);
+    border-radius: 12px;
+    background: rgba(26, 26, 46, 0.8);
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: #4facfe;
+    background: rgba(26, 26, 46, 0.95);
+    box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.1);
+  }
+
+  .search-input::placeholder {
+    color: #666;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4facfe;
+    pointer-events: none;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #888;
+    font-size: 1.125rem;
   }
 
   .container {

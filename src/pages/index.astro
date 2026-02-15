@@ -87,7 +87,9 @@ const featuredTopics = [
 
 <style>
   .hero {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1e 100%);
+    background:
+      linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.9) 50%, rgba(15, 15, 30, 0.95) 100%),
+      url('https://images.pexels.com/photos/2150/sky-space-dark-galaxy.jpg?auto=compress&cs=tinysrgb&w=1920') center/cover;
     padding: 6rem 2rem;
     text-align: center;
     position: relative;
@@ -97,12 +99,40 @@ const featuredTopics = [
   .hero::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background:
+      radial-gradient(circle, rgba(79, 172, 254, 0.15) 0%, transparent 70%),
+      url('https://images.pexels.com/photos/87651/earth-blue-planet-globe-planet-87651.jpeg?auto=compress&cs=tinysrgb&w=800') center/cover;
+    border-radius: 50%;
+    opacity: 0.3;
     pointer-events: none;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: url('https://images.pexels.com/photos/39649/moon-landing-apollo-11-nasa-buzz-aldrin-39649.jpeg?auto=compress&cs=tinysrgb&w=600') center/cover;
+    border-radius: 50%;
+    opacity: 0.2;
+    pointer-events: none;
+    animation: float 25s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+    }
+    50% {
+      transform: translateY(-20px) translateX(10px);
+    }
   }
 
   .hero-container {
