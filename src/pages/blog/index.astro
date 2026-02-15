@@ -1,0 +1,321 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const blogPosts = [
+  {
+    title: "What is Gravity? Understanding the Fundamental Force",
+    description: "Discover the fundamental force that shapes our universe. Learn about gravity's role in everything from falling apples to orbiting planets.",
+    slug: "what-is-gravity",
+    date: "2024-01-15",
+    readTime: "7 min read"
+  },
+  {
+    title: "Instant Gravity Explained: Classical vs Modern Physics",
+    description: "Explore the concept of instant gravity and how our understanding evolved from Newton's instantaneous action to Einstein's speed-of-light propagation.",
+    slug: "instant-gravity-explained",
+    date: "2024-01-18",
+    readTime: "8 min read"
+  },
+  {
+    title: "Gravitational Waves: The Historic Discovery That Changed Physics",
+    description: "Learn about the groundbreaking 2015 detection of gravitational waves, what they are, and why this discovery revolutionized our understanding of the universe.",
+    slug: "gravitational-waves-discovery",
+    date: "2024-01-20",
+    readTime: "9 min read"
+  },
+  {
+    title: "Newton vs Einstein: Two Revolutionary Views of Gravity",
+    description: "Compare and contrast Newton's and Einstein's theories of gravity, understanding when each applies and how they changed our view of the universe.",
+    slug: "newton-vs-einstein-gravity",
+    date: "2024-01-22",
+    readTime: "10 min read"
+  },
+  {
+    title: "Black Holes: Where Gravity Becomes Extreme",
+    description: "Explore the most extreme gravitational environments in the universe—black holes—where spacetime curvature becomes infinite and the laws of physics are tested.",
+    slug: "black-holes-gravity-explained",
+    date: "2024-01-25",
+    readTime: "9 min read"
+  },
+  {
+    title: "Time Dilation: How Gravity Affects the Flow of Time",
+    description: "Discover how gravity doesn't just bend space—it also warps time. Learn about gravitational time dilation and its surprising real-world effects.",
+    slug: "time-dilation-gravity",
+    date: "2024-01-28",
+    readTime: "8 min read"
+  },
+  {
+    title: "Gravity on Other Planets: A Comparative Guide",
+    description: "Explore how gravity differs across the solar system and what it would feel like to stand on other planets. From lightweight Mercury to crushing Jupiter.",
+    slug: "gravity-on-other-planets",
+    date: "2024-02-01",
+    readTime: "7 min read"
+  },
+  {
+    title: "Zero Gravity vs Microgravity: Understanding Weightlessness",
+    description: "Learn the difference between zero gravity and microgravity, how astronauts experience weightlessness, and why there's actually no such thing as zero gravity.",
+    slug: "zero-gravity-microgravity",
+    date: "2024-02-04",
+    readTime: "6 min read"
+  },
+  {
+    title: "Dark Matter and Gravity: The Universe's Hidden Mass",
+    description: "Explore dark matter—mysterious invisible matter that makes up 85% of the universe's mass—and how we discovered it through its gravitational effects.",
+    slug: "dark-matter-gravity",
+    date: "2024-02-07",
+    readTime: "9 min read"
+  },
+  {
+    title: "Ocean Tides: How the Moon's Gravity Shapes Our Seas",
+    description: "Discover how gravitational forces from the Moon and Sun create ocean tides, why we have two high tides per day, and the surprising tidal effects beyond Earth's oceans.",
+    slug: "tides-and-gravity",
+    date: "2024-02-10",
+    readTime: "7 min read"
+  },
+  {
+    title: "Gravitational Lensing: When Gravity Bends Light",
+    description: "Learn how massive objects bend light through gravitational lensing, creating cosmic mirages and allowing us to see the most distant objects in the universe.",
+    slug: "gravitational-lensing",
+    date: "2024-02-13",
+    readTime: "8 min read"
+  },
+  {
+    title: "Quantum Gravity: The Unsolved Mystery of Physics",
+    description: "Explore the biggest challenge in modern physics—reconciling quantum mechanics with general relativity to create a theory of quantum gravity.",
+    slug: "quantum-gravity-challenge",
+    date: "2024-02-16",
+    readTime: "10 min read"
+  },
+  {
+    title: "Gravity and Space Travel: Escaping Earth and Beyond",
+    description: "Understand how gravity affects space travel, from rocket launches to orbital mechanics, gravity assists, and the challenges of interplanetary journeys.",
+    slug: "gravity-and-space-travel",
+    date: "2024-02-19",
+    readTime: "9 min read"
+  },
+  {
+    title: "The Gravitational Constant: G, the Universe's Weakest Number",
+    description: "Explore Newton's gravitational constant G—one of the fundamental constants of nature—its measurement challenges, and why gravity is so weak.",
+    slug: "gravitational-constant",
+    date: "2024-02-22",
+    readTime: "7 min read"
+  },
+  {
+    title: "The Equivalence Principle: Einstein's Key Insight",
+    description: "Discover Einstein's equivalence principle—the idea that gravity and acceleration are indistinguishable—and how this simple insight revolutionized physics.",
+    slug: "equivalence-principle",
+    date: "2024-02-25",
+    readTime: "8 min read"
+  },
+  {
+    title: "Gravity in Everyday Life: Hidden Effects All Around Us",
+    description: "Discover how gravity affects your daily life in surprising ways, from blood circulation to GPS accuracy, cooking to sports performance.",
+    slug: "gravity-in-everyday-life",
+    date: "2024-02-28",
+    readTime: "6 min read"
+  },
+  {
+    title: "Neutron Stars: Extreme Gravity's Laboratory",
+    description: "Explore neutron stars—the densest objects in the universe besides black holes—where gravity is so extreme that matter behaves in impossible ways.",
+    slug: "neutron-stars-extreme-gravity",
+    date: "2024-03-02",
+    readTime: "8 min read"
+  },
+  {
+    title: "Antigravity: Separating Science from Science Fiction",
+    description: "Explore the concept of antigravity—what's scientifically possible, what's purely fictional, and why true antigravity remains elusive despite centuries of attempts.",
+    slug: "antigravity-myths-facts",
+    date: "2024-03-05",
+    readTime: "7 min read"
+  },
+  {
+    title: "Measuring g: How We Determine Gravitational Acceleration",
+    description: "Learn about the methods used to measure gravitational acceleration, from simple pendulums to sophisticated gravimeters, and why precise measurements matter.",
+    slug: "measuring-gravity-acceleration",
+    date: "2024-03-08",
+    readTime: "7 min read"
+  },
+  {
+    title: "The History of Gravity Theory: From Aristotle to Einstein",
+    description: "Journey through the fascinating history of how humanity's understanding of gravity evolved from ancient philosophy to modern physics.",
+    slug: "history-of-gravity-theory",
+    date: "2024-03-11",
+    readTime: "10 min read"
+  }
+];
+
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+<Layout
+  title="Blog - All Articles"
+  description="Explore our comprehensive collection of articles about gravity, instant gravity, and gravitational phenomena. From basic concepts to advanced topics in physics."
+  keywords="gravity blog, physics articles, gravity explained, instant gravity, gravitational physics"
+>
+  <div class="blog-header">
+    <div class="container">
+      <h1>InstaGrav Blog</h1>
+      <p class="subtitle">Exploring Gravity and the Universe</p>
+    </div>
+  </div>
+
+  <section class="blog-grid-section">
+    <div class="container">
+      <div class="blog-grid">
+        {blogPosts.map(post => (
+          <article class="blog-card">
+            <div class="blog-card-content">
+              <div class="blog-meta">
+                <span class="date">{formatDate(post.date)}</span>
+                <span class="divider">•</span>
+                <span class="read-time">{post.readTime}</span>
+              </div>
+              <h2>
+                <a href={`/blog/${post.slug}`}>{post.title}</a>
+              </h2>
+              <p>{post.description}</p>
+              <a href={`/blog/${post.slug}`} class="read-more">
+                Read Article →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .blog-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .blog-header h1 {
+    font-size: 3.5rem;
+    margin: 0 0 1rem 0;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    color: #b0b0b0;
+    margin: 0;
+  }
+
+  .blog-grid-section {
+    padding: 4rem 0;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+
+  .blog-card {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(79, 172, 254, 0.1);
+  }
+
+  .blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(79, 172, 254, 0.2);
+  }
+
+  .blog-card-content {
+    padding: 2rem;
+  }
+
+  .blog-meta {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #888;
+    margin-bottom: 1rem;
+  }
+
+  .divider {
+    color: #555;
+  }
+
+  .blog-card h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .blog-card h2 a {
+    color: #00f2fe;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .blog-card h2 a:hover {
+    color: #4facfe;
+  }
+
+  .blog-card p {
+    color: #b0b0b0;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .read-more {
+    display: inline-block;
+    color: #4facfe;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+  }
+
+  .read-more:hover {
+    transform: translateX(5px);
+  }
+
+  @media (max-width: 768px) {
+    .blog-header {
+      padding: 3rem 1rem 2rem;
+    }
+
+    .blog-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .blog-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .blog-card-content {
+      padding: 1.5rem;
+    }
+  }
+</style>

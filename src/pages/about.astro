@@ -1,0 +1,209 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="About InstaGrav"
+  description="Learn about InstaGrav, your comprehensive resource for understanding gravity, instant gravity, and gravitational phenomena. Discover our mission to make complex physics accessible to everyone."
+  keywords="about instagrav, gravity education, physics learning, gravitational science"
+>
+  <div class="about-hero">
+    <div class="container">
+      <h1>About InstaGrav</h1>
+      <p class="subtitle">Making Gravity Accessible to Everyone</p>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="content-block">
+        <h2>Our Mission</h2>
+        <p>
+          InstaGrav exists to demystify one of the universe's most fundamental forces. We believe that
+          understanding gravity shouldn't require an advanced physics degree. Whether you're a curious
+          student, an educator, or simply someone fascinated by how the universe works, we're here to
+          help you explore gravitational phenomena in an accessible, engaging way.
+        </p>
+      </div>
+
+      <div class="content-block">
+        <h2>What is Instant Gravity?</h2>
+        <p>
+          The concept of "instant gravity" bridges classical and modern physics. In Newtonian physics,
+          gravitational effects were thought to be instantaneous across any distance. Einstein's theory
+          of relativity revealed that gravitational changes propagate at the speed of light through
+          spacetime as gravitational waves.
+        </p>
+        <p>
+          This fascinating intersection of classical and modern physics raises profound questions about
+          the nature of reality, causality, and the structure of spacetime itself. At InstaGrav, we
+          explore these concepts and their implications for our understanding of the universe.
+        </p>
+      </div>
+
+      <div class="content-block">
+        <h2>What We Cover</h2>
+        <ul class="topics-list">
+          <li>Fundamental principles of gravity and gravitational force</li>
+          <li>Classical vs. relativistic interpretations of gravity</li>
+          <li>Gravitational waves and their detection</li>
+          <li>Time dilation and spacetime curvature</li>
+          <li>Black holes and extreme gravity</li>
+          <li>Practical applications of gravitational physics</li>
+          <li>Latest discoveries in gravitational research</li>
+          <li>Mathematical foundations made accessible</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h2>Why Gravity Matters</h2>
+        <p>
+          Gravity shapes everything in our universe, from the motion of planets to the evolution of
+          galaxies. It determines the trajectory of spacecraft, influences the passage of time, and
+          even affects GPS satellites orbiting Earth. Understanding gravity isn't just about abstract
+          physics—it has practical implications for technology, space exploration, and our daily lives.
+        </p>
+      </div>
+
+      <div class="cta-section">
+        <h2>Start Exploring</h2>
+        <p>Ready to dive into the fascinating world of gravity?</p>
+        <a href="/blog" class="cta-button">Read Our Blog</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .about-hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .about-hero h1 {
+    font-size: 3.5rem;
+    margin: 0 0 1rem 0;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    color: #b0b0b0;
+    margin: 0;
+  }
+
+  .content-section {
+    padding: 4rem 2rem;
+  }
+
+  .content-block {
+    margin-bottom: 3rem;
+  }
+
+  .content-block h2 {
+    color: #00f2fe;
+    margin: 0 0 1rem 0;
+    font-size: 2rem;
+  }
+
+  .content-block p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #b0b0b0;
+    margin: 0 0 1rem 0;
+  }
+
+  .topics-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  .topics-list li {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #b0b0b0;
+    padding-left: 2rem;
+    position: relative;
+    margin-bottom: 0.75rem;
+  }
+
+  .topics-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #4facfe;
+    font-weight: bold;
+  }
+
+  .cta-section {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 12px;
+  }
+
+  .cta-section h2 {
+    color: #00f2fe;
+    margin: 0 0 1rem 0;
+  }
+
+  .cta-section p {
+    font-size: 1.125rem;
+    color: #b0b0b0;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: #0f0f1e;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+  }
+
+  @media (max-width: 768px) {
+    .about-hero {
+      padding: 3rem 1rem 2rem;
+    }
+
+    .about-hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+    }
+
+    .content-section {
+      padding: 3rem 1rem;
+    }
+
+    .content-block h2 {
+      font-size: 1.75rem;
+    }
+
+    .content-block p,
+    .topics-list li {
+      font-size: 1rem;
+    }
+  }
+</style>

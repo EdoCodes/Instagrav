@@ -1,0 +1,333 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const featuredTopics = [
+  {
+    title: 'Understanding Gravity',
+    description: 'Explore the fundamental force that shapes our universe',
+    icon: '🌍'
+  },
+  {
+    title: 'Instant Gravity Explained',
+    description: 'Discover the fascinating world of instant gravitational effects',
+    icon: '⚡'
+  },
+  {
+    title: 'Gravitational Waves',
+    description: 'Learn about ripples in spacetime and their detection',
+    icon: '〰️'
+  },
+  {
+    title: 'Physics & Applications',
+    description: 'Real-world applications of gravity in science and technology',
+    icon: '🔬'
+  }
+];
+---
+
+<Layout
+  title="InstaGrav"
+  description="Your complete guide to understanding gravity, instant gravity, and gravitational phenomena. Explore the science, physics, and applications of one of nature's fundamental forces."
+  keywords="gravity, instant gravity, gravitational force, physics, science, gravity explained, gravitational waves, spacetime"
+>
+  <div class="hero">
+    <div class="hero-container">
+      <h1 class="hero-title">
+        <span class="gradient-text">InstaGrav<sup class="reg-mark">®</sup></span>
+      </h1>
+      <div class="tagline">Instant Gravity<sup class="tm-mark">™</sup></div>
+      <p class="hero-subtitle">
+        Your Complete Guide to Understanding Gravity and Instant Gravity
+      </p>
+      <p class="hero-description">
+        Explore the fundamental force that shapes our universe, from Newton's apple to Einstein's spacetime curvature and beyond.
+      </p>
+      <div class="hero-cta">
+        <a href="/blog" class="cta-button primary">Explore Articles</a>
+        <a href="/about" class="cta-button secondary">Learn More</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="topics">
+    <div class="container">
+      <h2 class="section-title">Featured Topics</h2>
+      <div class="topics-grid">
+        {featuredTopics.map(topic => (
+          <div class="topic-card">
+            <div class="topic-icon">{topic.icon}</div>
+            <h3>{topic.title}</h3>
+            <p>{topic.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="container">
+      <div class="intro-content">
+        <h2>What is Instant Gravity?</h2>
+        <p>
+          Instant gravity refers to the instantaneous nature of gravitational effects in classical physics,
+          contrasted with Einstein's theory of relativity where gravitational changes propagate at the speed of light.
+          This fascinating topic bridges classical and modern physics, offering insights into how we understand
+          the universe's most fundamental force.
+        </p>
+        <p>
+          At InstaGrav, we break down complex gravitational concepts into accessible, engaging content that
+          helps you understand everything from basic gravity to advanced topics like gravitational waves,
+          time dilation, and the nature of spacetime itself.
+        </p>
+        <a href="/blog" class="learn-more">Read Our Blog →</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1e 100%);
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-title {
+    font-size: 4rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 800;
+  }
+
+  .reg-mark {
+    font-size: 0.4em;
+    font-weight: 600;
+  }
+
+  .tagline {
+    font-size: 1.25rem;
+    color: #00f2fe;
+    margin: 0 0 1.5rem 0;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  .tm-mark {
+    font-size: 0.6em;
+    font-weight: 600;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+    color: #b0b0b0;
+    font-weight: 600;
+  }
+
+  .hero-description {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #888;
+    margin: 0 0 2.5rem 0;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .cta-button.primary {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: #0f0f1e;
+  }
+
+  .cta-button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+  }
+
+  .cta-button.secondary {
+    background: transparent;
+    border: 2px solid #4facfe;
+    color: #4facfe;
+  }
+
+  .cta-button.secondary:hover {
+    background: rgba(79, 172, 254, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .topics {
+    padding: 5rem 2rem;
+    background: #0f0f1e;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    text-align: center;
+    margin: 0 0 3rem 0;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .topic-card {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(79, 172, 254, 0.1);
+  }
+
+  .topic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(79, 172, 254, 0.2);
+  }
+
+  .topic-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .topic-card h3 {
+    margin: 0 0 0.5rem 0;
+    color: #00f2fe;
+  }
+
+  .topic-card p {
+    margin: 0;
+    color: #888;
+    line-height: 1.6;
+  }
+
+  .intro {
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+  }
+
+  .intro-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .intro-content h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1.5rem 0;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .intro-content p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #b0b0b0;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .learn-more {
+    display: inline-block;
+    color: #4facfe;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.125rem;
+    transition: transform 0.3s ease;
+  }
+
+  .learn-more:hover {
+    transform: translateX(5px);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 4rem 1rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+    }
+
+    .topics {
+      padding: 3rem 1rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .topics-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .intro {
+      padding: 3rem 1rem;
+    }
+
+    .intro-content h2 {
+      font-size: 2rem;
+    }
+  }
+</style>

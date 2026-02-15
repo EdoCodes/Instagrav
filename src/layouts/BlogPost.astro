@@ -1,0 +1,226 @@
+---
+import Layout from './Layout.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  publishDate: string;
+  author?: string;
+  readTime?: string;
+  keywords?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description,
+  publishDate,
+  author = 'InstaGrav Editorial Team',
+  readTime = '5 min read',
+  keywords,
+  image
+} = Astro.props;
+
+const formattedDate = new Date(publishDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<Layout
+  title={title}
+  description={description}
+  article={true}
+  publishedTime={publishDate}
+  keywords={keywords}
+  image={image}
+>
+  <article class="blog-post">
+    <header class="post-header">
+      <div class="container">
+        <h1>{title}</h1>
+        <div class="post-meta">
+          <span class="meta-item">By {author}</span>
+          <span class="meta-divider">•</span>
+          <span class="meta-item">{formattedDate}</span>
+          <span class="meta-divider">•</span>
+          <span class="meta-item">{readTime}</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="post-content">
+      <div class="container">
+        <slot />
+      </div>
+    </div>
+
+    <footer class="post-footer">
+      <div class="container">
+        <a href="/blog" class="back-link">← Back to All Articles</a>
+      </div>
+    </footer>
+  </article>
+</Layout>
+
+<style>
+  .blog-post {
+    padding: 2rem 0;
+  }
+
+  .post-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 4rem 2rem 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .post-header h1 {
+    font-size: 3rem;
+    margin: 0 0 1.5rem 0;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+    color: #888;
+  }
+
+  .meta-item {
+    color: #b0b0b0;
+  }
+
+  .meta-divider {
+    color: #555;
+  }
+
+  .post-content {
+    padding: 0 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .post-content :global(h2) {
+    color: #00f2fe;
+    margin: 2.5rem 0 1rem 0;
+    font-size: 2rem;
+  }
+
+  .post-content :global(h3) {
+    color: #4facfe;
+    margin: 2rem 0 1rem 0;
+    font-size: 1.5rem;
+  }
+
+  .post-content :global(p) {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #b0b0b0;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #b0b0b0;
+    margin: 0 0 1.5rem 0;
+    padding-left: 2rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .post-content :global(strong) {
+    color: #e0e0e0;
+    font-weight: 600;
+  }
+
+  .post-content :global(em) {
+    color: #c0c0c0;
+  }
+
+  .post-content :global(code) {
+    background: #1a1a2e;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #4facfe;
+  }
+
+  .post-content :global(pre) {
+    background: #1a1a2e;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 4px solid #4facfe;
+    padding-left: 1.5rem;
+    margin: 0 0 1.5rem 0;
+    color: #888;
+    font-style: italic;
+  }
+
+  .post-footer {
+    padding: 0 2rem 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: #4facfe;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+  }
+
+  .back-link:hover {
+    transform: translateX(-5px);
+  }
+
+  @media (max-width: 768px) {
+    .post-header {
+      padding: 3rem 1rem 2rem;
+    }
+
+    .post-header h1 {
+      font-size: 2rem;
+    }
+
+    .post-content {
+      padding: 0 1rem;
+    }
+
+    .post-content :global(h2) {
+      font-size: 1.75rem;
+    }
+
+    .post-content :global(h3) {
+      font-size: 1.25rem;
+    }
+
+    .post-content :global(p),
+    .post-content :global(ul),
+    .post-content :global(ol) {
+      font-size: 1rem;
+    }
+
+    .post-footer {
+      padding: 0 1rem 2rem;
+    }
+  }
+</style>
