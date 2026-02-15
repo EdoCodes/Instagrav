@@ -2,6 +2,7 @@ export async function GET() {
   const blogPosts = [
     { slug: 'what-is-gravity', date: '2024-01-15' },
     { slug: 'instant-gravity-explained', date: '2024-01-18' },
+    { slug: 'instant-gravity-revolution', date: '2024-01-19' },
     { slug: 'gravitational-waves-discovery', date: '2024-01-20' },
     { slug: 'newton-vs-einstein-gravity', date: '2024-01-22' },
     { slug: 'black-holes-gravity-explained', date: '2024-01-25' },
@@ -11,6 +12,7 @@ export async function GET() {
     { slug: 'dark-matter-gravity', date: '2024-02-07' },
     { slug: 'tides-and-gravity', date: '2024-02-10' },
     { slug: 'gravitational-lensing', date: '2024-02-13' },
+    { slug: 'scientists-of-gravity', date: '2024-02-15' },
     { slug: 'quantum-gravity-challenge', date: '2024-02-16' },
     { slug: 'gravity-and-space-travel', date: '2024-02-19' },
     { slug: 'gravitational-constant', date: '2024-02-22' },
