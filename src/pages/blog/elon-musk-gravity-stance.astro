@@ -18,6 +18,16 @@ import BlogPost from '../../layouts/BlogPost.astro';
 
 <p><strong>The verdict is clear: Elon Musk is not investing in anti-gravity technology, and the viral videos are AI-generated fakes.</strong> These fabricated stories have been debunked by fact-checkers, and even Musk himself has responded to the proliferation of fake AI content featuring his likeness.</p>
 
+<div class="video-container">
+  <iframe
+    src="https://www.youtube.com/embed/-2GTwvMsxTE"
+    title="Elon Musk on Gravity"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</div>
+
 <h2>What Is Elon Musk's Actual Stance on Gravity?</h2>
 
 <p>Rather than pursuing science fiction concepts like anti-gravity, Elon Musk and SpaceX have focused on working within the established laws of physics to achieve revolutionary spaceflight goals. Musk's approach to gravity is rooted in practical engineering and a deep understanding of orbital mechanics.</p>
@@ -114,3 +124,33 @@ import BlogPost from '../../layouts/BlogPost.astro';
 <p>As we continue to push the boundaries of space exploration, understanding the difference between legitimate technological advancement and fictional claims becomes increasingly important. Elon Musk's approach—working within the laws of physics to achieve the seemingly impossible—offers a more inspiring and realistic vision of humanity's future among the stars.</p>
 
 </BlogPost>
+
+<style>
+  .video-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 2rem auto;
+    padding-bottom: 177.78%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media (max-width: 768px) {
+    .video-container {
+      max-width: 100%;
+      padding-bottom: 177.78%;
+    }
+  }
+</style>
