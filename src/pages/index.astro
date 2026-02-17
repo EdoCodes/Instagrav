@@ -196,13 +196,16 @@ function formatDate(dateString: string) {
   .hero::after {
     content: '';
     position: absolute;
-    bottom: -30%;
-    left: -5%;
-    width: 500px;
-    height: 500px;
+    top: 50%;
+    left: 5%;
+    width: 400px;
+    height: 400px;
     background: url('https://images.pexels.com/photos/41006/astronaut-floating-space-nasa-41006.jpeg?auto=compress&cs=tinysrgb&w=800') center/cover;
-    opacity: 0.25;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.6;
     pointer-events: none;
+    transform: translateY(-50%);
     animation: float 25s ease-in-out infinite reverse;
   }
 
