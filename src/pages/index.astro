@@ -200,21 +200,22 @@ function formatDate(dateString: string) {
     right: 15%;
     width: 300px;
     height: 300px;
-    background: url('https://images.pexels.com/photos/41006/astronaut-floating-space-nasa-41006.jpeg?auto=compress&cs=tinysrgb&w=800') center/cover;
+    background: url('https://images.pexels.com/photos/1181280/pexels-photo-1181280.jpeg?auto=compress&cs=tinysrgb&w=800') center/cover;
     background-size: contain;
     background-repeat: no-repeat;
-    opacity: 0.8;
+    opacity: 0.7;
     pointer-events: none;
     animation: float 25s ease-in-out infinite reverse;
     filter: brightness(1.2) contrast(1.1);
+    transform: perspective(500px) rotateY(15deg);
   }
 
   @keyframes float {
     0%, 100% {
-      transform: translateY(0) translateX(0);
+      transform: perspective(500px) rotateY(15deg) translateY(0) translateX(0);
     }
     50% {
-      transform: translateY(-20px) translateX(10px);
+      transform: perspective(500px) rotateY(15deg) translateY(-20px) translateX(10px);
     }
   }
 
