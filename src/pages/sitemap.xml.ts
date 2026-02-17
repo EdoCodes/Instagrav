@@ -21,7 +21,9 @@ export async function GET() {
     { slug: 'neutron-stars-extreme-gravity', date: '2024-03-02' },
     { slug: 'antigravity-myths-facts', date: '2024-03-05' },
     { slug: 'measuring-gravity-acceleration', date: '2024-03-08' },
-    { slug: 'history-of-gravity-theory', date: '2024-03-11' }
+    { slug: 'history-of-gravity-theory', date: '2024-03-11' },
+    { slug: 'cosmonauts-statements-gravity', date: '2024-02-15' },
+    { slug: 'feynman-gravity-stance', date: '2024-03-18' }
   ];
 
   const staticPages = [
