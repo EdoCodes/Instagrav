@@ -1,28 +1,52 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const featuredTopics = [
+const featuredPosts = [
   {
-    title: 'Understanding Gravity',
-    description: 'Explore the fundamental force that shapes our universe',
-    icon: '🌍'
+    title: "Black Holes: Where Gravity Becomes Extreme",
+    description: "Explore the most extreme gravitational environments in the universe—black holes—where spacetime curvature becomes infinite and the laws of physics are tested.",
+    slug: "black-holes-gravity-explained",
+    date: "2024-01-25",
+    readTime: "9 min read",
+    image: "https://images.pexels.com/photos/2422482/pexels-photo-2422482.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    category: "Extreme Physics"
   },
   {
-    title: 'Instant Gravity Explained',
-    description: 'Discover the fascinating world of instant gravitational effects',
-    icon: '⚡'
+    title: "Gravitational Waves: The Historic Discovery That Changed Physics",
+    description: "Learn about the groundbreaking 2015 detection of gravitational waves and why this discovery revolutionized our understanding of the universe.",
+    slug: "gravitational-waves-discovery",
+    date: "2024-01-20",
+    readTime: "9 min read",
+    image: "https://images.pexels.com/photos/2159/flight-sky-earth-space.jpg?auto=compress&cs=tinysrgb&w=800",
+    category: "Discoveries"
   },
   {
-    title: 'Gravitational Waves',
-    description: 'Learn about ripples in spacetime and their detection',
-    icon: '〰️'
+    title: "Time Dilation: How Gravity Affects the Flow of Time",
+    description: "Discover how gravity doesn't just bend space—it also warps time. Learn about gravitational time dilation and its surprising real-world effects.",
+    slug: "time-dilation-gravity",
+    date: "2024-01-28",
+    readTime: "8 min read",
+    image: "https://images.pexels.com/photos/1169754/pexels-photo-1169754.jpeg?auto=compress&cs=tinysrgb&w=800",
+    category: "Theory"
   },
   {
-    title: 'Physics & Applications',
-    description: 'Real-world applications of gravity in science and technology',
-    icon: '🔬'
+    title: "Dark Matter and Gravity: The Universe's Hidden Mass",
+    description: "Explore dark matter—mysterious invisible matter that makes up 85% of the universe's mass—and how we discovered it through its gravitational effects.",
+    slug: "dark-matter-gravity",
+    date: "2024-02-07",
+    readTime: "9 min read",
+    image: "https://images.pexels.com/photos/1252890/pexels-photo-1252890.jpeg?auto=compress&cs=tinysrgb&w=800",
+    category: "Mysteries"
   }
 ];
+
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
 ---
 
 <Layout
@@ -61,17 +85,45 @@ const featuredTopics = [
     </div>
   </div>
 
-  <section class="topics">
+  <section class="featured-posts">
     <div class="container">
-      <h2 class="section-title">Featured Topics</h2>
-      <div class="topics-grid">
-        {featuredTopics.map(topic => (
-          <div class="topic-card">
-            <div class="topic-icon">{topic.icon}</div>
-            <h3>{topic.title}</h3>
-            <p>{topic.description}</p>
+      <div class="section-header">
+        <h2 class="section-title">Featured Articles</h2>
+        <a href="/blog" class="view-all">View All Articles →</a>
+      </div>
+      <div class="posts-layout">
+        <a href={`/blog/${featuredPosts[0].slug}`} class="hero-post">
+          <div class="post-image" style={`background-image: url('${featuredPosts[0].image}')`}>
+            <span class="post-category">{featuredPosts[0].category}</span>
           </div>
-        ))}
+          <div class="post-content">
+            <div class="post-meta">
+              <span class="date">{formatDate(featuredPosts[0].date)}</span>
+              <span class="divider">•</span>
+              <span class="read-time">{featuredPosts[0].readTime}</span>
+            </div>
+            <h3>{featuredPosts[0].title}</h3>
+            <p>{featuredPosts[0].description}</p>
+          </div>
+        </a>
+        <div class="secondary-posts">
+          {featuredPosts.slice(1).map(post => (
+            <a href={`/blog/${post.slug}`} class="post-card">
+              <div class="post-image-small" style={`background-image: url('${post.image}')`}>
+                <span class="post-category">{post.category}</span>
+              </div>
+              <div class="post-content-small">
+                <div class="post-meta">
+                  <span class="date">{formatDate(post.date)}</span>
+                  <span class="divider">•</span>
+                  <span class="read-time">{post.readTime}</span>
+                </div>
+                <h4>{post.title}</h4>
+                <p>{post.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -291,7 +343,7 @@ const featuredTopics = [
     transform: translateY(-2px);
   }
 
-  .topics {
+  .featured-posts {
     padding: 5rem 2rem;
     background: #0f0f1e;
   }
@@ -301,9 +353,17 @@ const featuredTopics = [
     margin: 0 auto;
   }
 
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
   .section-title {
-    text-align: center;
-    margin: 0 0 3rem 0;
+    margin: 0;
     font-size: 2.5rem;
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     -webkit-background-clip: text;
@@ -311,40 +371,163 @@ const featuredTopics = [
     background-clip: text;
   }
 
-  .topics-grid {
+  .view-all {
+    color: #4facfe;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.125rem;
+    transition: transform 0.3s ease;
+  }
+
+  .view-all:hover {
+    transform: translateX(5px);
+  }
+
+  .posts-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1.2fr 1fr;
     gap: 2rem;
   }
 
-  .topic-card {
+  .hero-post {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    padding: 2rem;
-    border-radius: 12px;
-    text-align: center;
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(79, 172, 254, 0.1);
+    border: 1px solid rgba(79, 172, 254, 0.15);
   }
 
-  .topic-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(79, 172, 254, 0.2);
+  .hero-post:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(79, 172, 254, 0.25);
   }
 
-  .topic-icon {
-    font-size: 3rem;
+  .post-image {
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  .post-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(26, 26, 46, 0.7) 100%);
+  }
+
+  .post-category {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: #0f0f1e;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 1;
+  }
+
+  .post-content {
+    padding: 2rem;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.875rem;
+    color: #888;
     margin-bottom: 1rem;
   }
 
-  .topic-card h3 {
-    margin: 0 0 0.5rem 0;
-    color: #00f2fe;
+  .divider {
+    color: #555;
   }
 
-  .topic-card p {
+  .hero-post h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.875rem;
+    line-height: 1.3;
+    color: #ffffff;
+  }
+
+  .hero-post p {
+    margin: 0;
+    color: #b0b0b0;
+    line-height: 1.7;
+    font-size: 1.0625rem;
+  }
+
+  .secondary-posts {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .post-card {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(79, 172, 254, 0.15);
+  }
+
+  .post-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 10px 30px rgba(79, 172, 254, 0.2);
+  }
+
+  .post-image-small {
+    width: 180px;
+    min-height: 180px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  .post-image-small::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.3) 0%, rgba(26, 26, 46, 0.6) 100%);
+  }
+
+  .post-image-small .post-category {
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  .post-content-small {
+    padding: 1.5rem;
+    flex: 1;
+  }
+
+  .post-card h4 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: #ffffff;
+  }
+
+  .post-card p {
     margin: 0;
     color: #888;
     line-height: 1.6;
+    font-size: 0.9375rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .intro {
@@ -407,16 +590,34 @@ const featuredTopics = [
       font-size: 1rem;
     }
 
-    .topics {
+    .featured-posts {
       padding: 3rem 1rem;
+    }
+
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .section-title {
       font-size: 2rem;
     }
 
-    .topics-grid {
+    .posts-layout {
       grid-template-columns: 1fr;
+    }
+
+    .post-image {
+      height: 250px;
+    }
+
+    .post-card {
+      flex-direction: column;
+    }
+
+    .post-image-small {
+      width: 100%;
+      min-height: 200px;
     }
 
     .intro {
