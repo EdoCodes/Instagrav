@@ -42,6 +42,18 @@ const featuredTopics = [
       <p class="hero-description">
         Explore the fundamental force that shapes our universe, from Newton's apple to Einstein's spacetime curvature and beyond.
       </p>
+      <div class="search-container">
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Search articles about gravity, instant gravity, black holes..."
+          class="search-input"
+        />
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+      </div>
       <div class="hero-cta">
         <a href="/blog" class="cta-button primary">Explore Articles</a>
         <a href="/about" class="cta-button secondary">Learn More</a>
@@ -83,6 +95,23 @@ const featuredTopics = [
       </div>
     </div>
   </section>
+
+  <script>
+    const searchInput = document.getElementById('search-input');
+
+    if (searchInput) {
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          const searchTerm = searchInput.value.trim();
+          if (searchTerm) {
+            window.location.href = `/blog?search=${encodeURIComponent(searchTerm)}`;
+          } else {
+            window.location.href = '/blog';
+          }
+        }
+      });
+    }
+  </script>
 </Layout>
 
 <style>
@@ -184,7 +213,45 @@ const featuredTopics = [
     font-size: 1.125rem;
     line-height: 1.8;
     color: #888;
-    margin: 0 0 2.5rem 0;
+    margin: 0 0 2rem 0;
+  }
+
+  .search-container {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    position: relative;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    font-size: 1rem;
+    border: 2px solid rgba(79, 172, 254, 0.3);
+    border-radius: 12px;
+    background: rgba(26, 26, 46, 0.8);
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: #4facfe;
+    background: rgba(26, 26, 46, 0.95);
+    box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.1);
+  }
+
+  .search-input::placeholder {
+    color: #666;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4facfe;
+    pointer-events: none;
   }
 
   .hero-cta {

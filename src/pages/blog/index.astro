@@ -176,18 +176,6 @@ function formatDate(dateString: string) {
     <div class="container">
       <h1>InstaGrav Blog</h1>
       <p class="subtitle">Exploring Gravity and the Universe</p>
-      <div class="search-container">
-        <input
-          type="search"
-          id="search-input"
-          placeholder="Search articles about gravity, instant gravity, black holes..."
-          class="search-input"
-        />
-        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.35-4.35"></path>
-        </svg>
-      </div>
     </div>
   </div>
 
@@ -220,32 +208,37 @@ function formatDate(dateString: string) {
   </section>
 
   <script>
-    const searchInput = document.getElementById('search-input');
-    const blogGrid = document.getElementById('blog-grid');
     const noResults = document.getElementById('no-results');
     const blogCards = document.querySelectorAll('.blog-card');
 
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase().trim();
-        let visibleCount = 0;
+    // Check for search parameter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('search');
 
-        blogCards.forEach(card => {
-          const title = card.getAttribute('data-title') || '';
-          const description = card.getAttribute('data-description') || '';
+    function filterArticles(searchTerm) {
+      const term = searchTerm.toLowerCase().trim();
+      let visibleCount = 0;
 
-          if (searchTerm === '' || title.includes(searchTerm) || description.includes(searchTerm)) {
-            card.style.display = 'block';
-            visibleCount++;
-          } else {
-            card.style.display = 'none';
-          }
-        });
+      blogCards.forEach(card => {
+        const title = card.getAttribute('data-title') || '';
+        const description = card.getAttribute('data-description') || '';
 
-        if (noResults) {
-          noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        if (term === '' || title.includes(term) || description.includes(term)) {
+          card.style.display = 'block';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
         }
       });
+
+      if (noResults) {
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+    }
+
+    // Apply search filter if parameter exists
+    if (searchParam) {
+      filterArticles(searchParam);
     }
   </script>
 </Layout>
@@ -282,44 +275,6 @@ function formatDate(dateString: string) {
     50% {
       transform: translateY(-15px) rotate(5deg);
     }
-  }
-
-  .search-container {
-    max-width: 600px;
-    margin: 2rem auto 0;
-    position: relative;
-  }
-
-  .search-input {
-    width: 100%;
-    padding: 1rem 1rem 1rem 3rem;
-    font-size: 1rem;
-    border: 2px solid rgba(79, 172, 254, 0.3);
-    border-radius: 12px;
-    background: rgba(26, 26, 46, 0.8);
-    color: #e0e0e0;
-    transition: all 0.3s ease;
-    font-family: 'Inter', system-ui, sans-serif;
-  }
-
-  .search-input:focus {
-    outline: none;
-    border-color: #4facfe;
-    background: rgba(26, 26, 46, 0.95);
-    box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.1);
-  }
-
-  .search-input::placeholder {
-    color: #666;
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #4facfe;
-    pointer-events: none;
   }
 
   .no-results {
