@@ -1,5 +1,6 @@
 export async function GET() {
   const blogPosts = [
+    { slug: 'elon-musk-gravity-stance', date: '2026-02-17' },
     { slug: 'what-is-gravity', date: '2026-02-17' },
     { slug: 'instant-gravity-explained', date: '2026-02-17' },
     { slug: 'instant-gravity-revolution', date: '2026-02-17' },
