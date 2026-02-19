@@ -67,26 +67,29 @@ function formatDate(dateString: string) {
       <p class="hero-description">
         Explore the fundamental force that shapes our universe, from Newton's apple to Einstein's spacetime curvature and beyond.
       </p>
-      <div class="search-container">
-        <input
-          type="search"
-          id="search-input"
-          placeholder="Search articles about gravity, instant gravity, black holes..."
-          class="search-input"
-        />
-        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.35-4.35"></path>
-        </svg>
-      </div>
-      <div class="hero-cta">
-        <a href="/blog" class="cta-button primary">Explore Articles</a>
-        <a href="/about" class="cta-button secondary">Learn More</a>
-      </div>
     </div>
   </div>
 
   <GravityCalculator />
+
+  <div class="search-section">
+    <div class="search-container">
+      <input
+        type="search"
+        id="search-input"
+        placeholder="Search articles about gravity, instant gravity, black holes..."
+        class="search-input"
+      />
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+    </div>
+    <div class="hero-cta">
+      <a href="/blog" class="cta-button primary">Explore Articles</a>
+      <a href="/about" class="cta-button secondary">Learn More</a>
+    </div>
+  </div>
 
   <section class="featured-posts">
     <div class="container">
@@ -174,7 +177,7 @@ function formatDate(dateString: string) {
     background:
       linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.9) 50%, rgba(15, 15, 30, 0.95) 100%),
       url('https://images.pexels.com/photos/2150/sky-space-dark-galaxy.jpg?auto=compress&cs=tinysrgb&w=1920') center/cover;
-    padding: 6rem 2rem;
+    padding: 4rem 2rem 3rem 2rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -255,7 +258,13 @@ function formatDate(dateString: string) {
     font-size: 1.125rem;
     line-height: 1.8;
     color: #888;
-    margin: 0 0 2rem 0;
+    margin: 0;
+  }
+
+  .search-section {
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+    padding: 3rem 2rem;
+    text-align: center;
   }
 
   .search-container {
@@ -561,7 +570,7 @@ function formatDate(dateString: string) {
 
   @media (max-width: 768px) {
     .hero {
-      padding: 4rem 1rem;
+      padding: 3rem 1rem 2rem 1rem;
     }
 
     .hero-title {
@@ -578,6 +587,10 @@ function formatDate(dateString: string) {
 
     .hero-description {
       font-size: 1rem;
+    }
+
+    .search-section {
+      padding: 2rem 1rem;
     }
 
     .featured-posts {
