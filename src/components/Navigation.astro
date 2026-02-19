@@ -9,6 +9,7 @@ const currentPath = Astro.url.pathname;
     </a>
     <ul class="nav-links">
       <li><a href="/" class={currentPath === '/' ? 'active' : ''}>Home</a></li>
+      <li><a href="/#calculator">InstaGrav Calculator</a></li>
       <li><a href="/blog" class={currentPath.startsWith('/blog') ? 'active' : ''}>Blog</a></li>
       <li><a href="/about" class={currentPath === '/about' ? 'active' : ''}>About</a></li>
     </ul>
