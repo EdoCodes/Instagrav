@@ -1,0 +1,107 @@
+---
+interface Props {
+  author: 'asim' | 'mitija';
+}
+
+const { author } = Astro.props;
+
+const authors = {
+  asim: {
+    name: 'Dr. Asim Rosic',
+    title: 'Theoretical Physicist',
+    bio: 'Dr. Asim Rosic is a theoretical physicist specializing in gravitational research. With over 15 years of experience in the field, he has contributed to numerous publications on quantum gravity and spacetime phenomena. His passion lies in making complex gravitational concepts accessible to everyone.',
+    photo: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400'
+  },
+  mitija: {
+    name: 'Dr. Mitija Ribicic',
+    title: 'Theoretical Physicist',
+    bio: 'Dr. Mitija Ribicic is a renowned theoretical physicist dedicated to exploring the mysteries of gravity. His research focuses on gravitational waves and their implications for our understanding of the universe. He is passionate about science communication and sharing the wonders of gravitational physics.',
+    photo: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400'
+  }
+};
+
+const authorData = authors[author];
+---
+
+<div class="author-box">
+  <img src={authorData.photo} alt={authorData.name} class="author-photo" />
+  <div class="author-info">
+    <h3 class="author-name">{authorData.name}</h3>
+    <p class="author-title">{authorData.title}</p>
+    <p class="author-bio">{authorData.bio}</p>
+  </div>
+</div>
+
+<style>
+  .author-box {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 1px solid #2a2a4e;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 3rem 0;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .author-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4a9eff;
+    flex-shrink: 0;
+  }
+
+  .author-info {
+    flex: 1;
+  }
+
+  .author-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .author-title {
+    font-size: 1rem;
+    color: #4a9eff;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+  }
+
+  .author-bio {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #b0b0b0;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .author-box {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+
+    .author-photo {
+      width: 100px;
+      height: 100px;
+    }
+
+    .author-name {
+      font-size: 1.25rem;
+    }
+
+    .author-title {
+      font-size: 0.9rem;
+    }
+
+    .author-bio {
+      font-size: 0.9rem;
+    }
+  }
+</style>
