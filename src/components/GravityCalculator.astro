@@ -1,0 +1,410 @@
+---
+// Gravitational Constant Calculator Component
+---
+
+<div class="calculator-container">
+  <h2 class="calculator-title">Gravitational Force Calculator</h2>
+  <p class="calculator-description">
+    Calculate the gravitational force between two objects using Newton's law of universal gravitation.
+  </p>
+
+  <div class="calculator-card">
+    <div class="formula-display">
+      <span class="formula">F = G × (m₁ × m₂) / r²</span>
+      <span class="formula-note">where G = 6.67430 × 10⁻¹¹ N⋅m²/kg²</span>
+    </div>
+
+    <div class="input-group">
+      <label for="mass1">Mass 1 (kg)</label>
+      <input
+        type="number"
+        id="mass1"
+        placeholder="e.g., 5.972 × 10²⁴ (Earth)"
+        step="any"
+        value="5.972e24"
+      />
+    </div>
+
+    <div class="input-group">
+      <label for="mass2">Mass 2 (kg)</label>
+      <input
+        type="number"
+        id="mass2"
+        placeholder="e.g., 7.348 × 10²² (Moon)"
+        step="any"
+        value="7.348e22"
+      />
+    </div>
+
+    <div class="input-group">
+      <label for="distance">Distance (meters)</label>
+      <input
+        type="number"
+        id="distance"
+        placeholder="e.g., 3.844 × 10⁸ (Earth-Moon)"
+        step="any"
+        value="3.844e8"
+      />
+    </div>
+
+    <button id="calculateBtn" class="calculate-btn">Calculate Force</button>
+
+    <div id="result" class="result hidden">
+      <div class="result-label">Gravitational Force:</div>
+      <div id="resultValue" class="result-value"></div>
+      <div id="resultScientific" class="result-scientific"></div>
+    </div>
+
+    <div class="presets">
+      <p class="presets-label">Quick Presets:</p>
+      <div class="preset-buttons">
+        <button class="preset-btn" data-preset="earth-moon">Earth-Moon</button>
+        <button class="preset-btn" data-preset="earth-sun">Earth-Sun</button>
+        <button class="preset-btn" data-preset="apple-earth">Apple-Earth</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const G = 6.67430e-11;
+
+  const presets = {
+    'earth-moon': {
+      mass1: 5.972e24,
+      mass2: 7.348e22,
+      distance: 3.844e8,
+      name: 'Earth and Moon'
+    },
+    'earth-sun': {
+      mass1: 5.972e24,
+      mass2: 1.989e30,
+      distance: 1.496e11,
+      name: 'Earth and Sun'
+    },
+    'apple-earth': {
+      mass1: 0.102,
+      mass2: 5.972e24,
+      distance: 6.371e6,
+      name: 'Apple and Earth (at surface)'
+    }
+  };
+
+  function calculateGravitationalForce(m1: number, m2: number, r: number): number {
+    return G * (m1 * m2) / (r * r);
+  }
+
+  function formatScientific(num: number): string {
+    return num.toExponential(4);
+  }
+
+  function formatReadable(num: number): string {
+    if (num >= 1e12) return (num / 1e12).toFixed(2) + ' trillion N';
+    if (num >= 1e9) return (num / 1e9).toFixed(2) + ' billion N';
+    if (num >= 1e6) return (num / 1e6).toFixed(2) + ' million N';
+    if (num >= 1e3) return (num / 1e3).toFixed(2) + ' thousand N';
+    if (num >= 1) return num.toFixed(4) + ' N';
+    return formatScientific(num) + ' N';
+  }
+
+  function calculate() {
+    const mass1Input = document.getElementById('mass1') as HTMLInputElement;
+    const mass2Input = document.getElementById('mass2') as HTMLInputElement;
+    const distanceInput = document.getElementById('distance') as HTMLInputElement;
+    const resultDiv = document.getElementById('result');
+    const resultValue = document.getElementById('resultValue');
+    const resultScientific = document.getElementById('resultScientific');
+
+    const m1 = parseFloat(mass1Input.value);
+    const m2 = parseFloat(mass2Input.value);
+    const r = parseFloat(distanceInput.value);
+
+    if (isNaN(m1) || isNaN(m2) || isNaN(r) || m1 <= 0 || m2 <= 0 || r <= 0) {
+      alert('Please enter valid positive numbers for all fields');
+      return;
+    }
+
+    const force = calculateGravitationalForce(m1, m2, r);
+
+    if (resultValue && resultScientific && resultDiv) {
+      resultValue.textContent = formatReadable(force);
+      resultScientific.textContent = formatScientific(force) + ' N';
+      resultDiv.classList.remove('hidden');
+      resultDiv.style.animation = 'none';
+      setTimeout(() => {
+        if (resultDiv) resultDiv.style.animation = 'fadeIn 0.5s ease';
+      }, 10);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const calculateBtn = document.getElementById('calculateBtn');
+    const presetButtons = document.querySelectorAll('.preset-btn');
+
+    if (calculateBtn) {
+      calculateBtn.addEventListener('click', calculate);
+    }
+
+    document.querySelectorAll('#mass1, #mass2, #distance').forEach(input => {
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') calculate();
+      });
+    });
+
+    presetButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const presetKey = btn.getAttribute('data-preset');
+        if (presetKey && presets[presetKey]) {
+          const preset = presets[presetKey];
+          const mass1Input = document.getElementById('mass1') as HTMLInputElement;
+          const mass2Input = document.getElementById('mass2') as HTMLInputElement;
+          const distanceInput = document.getElementById('distance') as HTMLInputElement;
+
+          if (mass1Input && mass2Input && distanceInput) {
+            mass1Input.value = preset.mass1.toString();
+            mass2Input.value = preset.mass2.toString();
+            distanceInput.value = preset.distance.toString();
+            calculate();
+          }
+        }
+      });
+    });
+
+    calculate();
+  });
+</script>
+
+<style>
+  .calculator-container {
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+  }
+
+  .calculator-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .calculator-description {
+    text-align: center;
+    color: #b0b0b0;
+    font-size: 1.125rem;
+    margin: 0 0 3rem 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .calculator-card {
+    max-width: 600px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid rgba(79, 172, 254, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .formula-display {
+    background: rgba(79, 172, 254, 0.1);
+    border: 1px solid rgba(79, 172, 254, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .formula {
+    display: block;
+    font-size: 1.5rem;
+    color: #4facfe;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-family: 'Georgia', serif;
+  }
+
+  .formula-note {
+    display: block;
+    font-size: 0.875rem;
+    color: #888;
+  }
+
+  .input-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #e0e0e0;
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: rgba(15, 15, 30, 0.6);
+    border: 2px solid rgba(79, 172, 254, 0.3);
+    border-radius: 8px;
+    color: #e0e0e0;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  .input-group input:focus {
+    outline: none;
+    border-color: #4facfe;
+    background: rgba(15, 15, 30, 0.8);
+    box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.1);
+  }
+
+  .input-group input::placeholder {
+    color: #666;
+  }
+
+  .calculate-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: #0f0f1e;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .calculate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+  }
+
+  .calculate-btn:active {
+    transform: translateY(0);
+  }
+
+  .result {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(79, 172, 254, 0.1);
+    border: 2px solid rgba(79, 172, 254, 0.3);
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .result.hidden {
+    display: none;
+  }
+
+  .result-label {
+    font-size: 0.9375rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .result-value {
+    font-size: 2rem;
+    color: #4facfe;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-scientific {
+    font-size: 1.125rem;
+    color: #b0b0b0;
+    font-family: 'Courier New', monospace;
+  }
+
+  .presets {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(79, 172, 254, 0.2);
+  }
+
+  .presets-label {
+    color: #888;
+    font-size: 0.9375rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .preset-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .preset-btn {
+    padding: 0.625rem 1.25rem;
+    background: rgba(79, 172, 254, 0.1);
+    border: 1px solid rgba(79, 172, 254, 0.3);
+    border-radius: 6px;
+    color: #4facfe;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .preset-btn:hover {
+    background: rgba(79, 172, 254, 0.2);
+    border-color: #4facfe;
+    transform: translateY(-2px);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .calculator-container {
+      padding: 3rem 1rem;
+    }
+
+    .calculator-title {
+      font-size: 2rem;
+    }
+
+    .calculator-card {
+      padding: 1.5rem;
+    }
+
+    .formula {
+      font-size: 1.25rem;
+    }
+
+    .result-value {
+      font-size: 1.5rem;
+    }
+
+    .preset-buttons {
+      flex-direction: column;
+    }
+
+    .preset-btn {
+      width: 100%;
+    }
+  }
+</style>
