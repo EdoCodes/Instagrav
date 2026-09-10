@@ -26,9 +26,11 @@ const {
 const siteURL = Astro.site || 'https://instagrav.com';
 const currentURL = canonicalURL || new URL(Astro.url.pathname, siteURL).href;
 const imageURL = new URL(image, siteURL).href;
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 ---
 
 <meta name="google-site-verification" content="C9TTwm0uPwIJ7wfy9xVlbJouIfE0rifbvSdWRKYr9S4" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
 <meta name="author" content={author} />
@@ -79,7 +81,38 @@ const imageURL = new URL(image, siteURL).href;
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "InstaGrav",
-    "description": "Your complete guide to understanding gravity and instant gravity",
-    "url": siteURL
+    "alternateName": "Instant Gravity Calculator",
+    "description": "Free gravitational force calculator and guides to gravity, instant gravity, and gravitational physics.",
+    "url": siteURL,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://instagrav.com/blog?search={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  })} />
+)}
+
+{isHome && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "InstaGrav Gravity Calculator",
+    "url": siteURL,
+    "description": "Free online calculator for Newton's law of universal gravitation. Compute gravitational force between two masses from m1, m2, and distance.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "InstaGrav",
+      "url": siteURL
+    }
   })} />
 )}

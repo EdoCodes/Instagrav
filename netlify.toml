@@ -1,3 +1,9 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+[[redirects]]
+  from = "https://www.instagrav.com/*"
+  to = "https://instagrav.com/:splat"
+  status = 301
+  force = true
