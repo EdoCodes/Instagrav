@@ -2,13 +2,6 @@
   command = "npm run build"
   publish = "dist"
 
-# Static files must win over any leftover SSR function from older deploys.
-[[redirects]]
-  from = "/sitemap.xml"
-  to = "/sitemap.xml"
-  status = 200
-  force = true
-
 [[redirects]]
   from = "https://www.instagrav.com/*"
   to = "https://instagrav.com/:splat"
